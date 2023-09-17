@@ -4,25 +4,26 @@
 // multiply
 // divide
 
-function add(a,b) {
-    return a + b;
-}
-
-function subtract(a,b) {
-    return a - b;
-}
-
-function multiply(a,b) {
-    return a * b;
-}
-
-function divide(a,b) {
-    return a / b;
-}
-
+calculations = {
+    "+": (a,b) => a + b,
+    "-": (a,b) => a - b,
+    "*": (a,b) => a * b,
+    "/": (a,b) => a / b,
+};
 
 // A calculator operation will consist of a number, an operator, and another number. For example, 3 + 5. Create three variables for each of the parts of a calculator operation. Create a variable for the first number, the operator, and the second number. You’ll use these variables to update your display later.
 
-const operandA;
-const operandB;
-const operator;
+let operandA;
+let operandB;
+let operator;
+
+
+// Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
+
+function operate(operator, a, b) {
+   let result = calculations[operator](a,b);
+   console.log(result);
+}
+
+operate("+", 2, 2);
+
