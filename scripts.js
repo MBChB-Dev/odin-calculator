@@ -32,6 +32,7 @@ function operate(operator, a, b) {
 // Add a “clear” button.
 
 const keypad = document.querySelector(".keypad");
+const display = document.querySelector(".display");
 
 const buttonLabels = [
     "C", "()", "%", "/",
@@ -52,6 +53,9 @@ for (let i = 0; i < 5; i++) {
         const key = document.createElement("button");
         key.classList.add("button", `key-${buttonLabels[buttonIndex]}`);
         key.textContent = buttonLabels[buttonIndex];
+        key.addEventListener("click", (e) => {
+            display.textContent = e.target.textContent;
+        })
         row.appendChild(key);    
 
         buttonIndex++;
