@@ -22,8 +22,42 @@ let operator;
 
 function operate(operator, a, b) {
    let result = calculations[operator](a,b);
-   console.log(result);
+   return result;
 }
 
-operate("+", 2, 2);
+
+// Create a basic HTML calculator with buttons for each digit, each of the above functions and an “Equals” key.
+// Do not worry about wiring up the JS just yet.
+// There should also be a display for the calculator. Go ahead and fill it with some dummy numbers so it looks correct.
+// Add a “clear” button.
+
+const keypad = document.querySelector(".keypad");
+
+const buttonLabels = [
+    "C", "()", "%", "/",
+    "7", "8", "9", "*",
+    "4", "5", "6", "-",
+    "1", "2", "3", "+",
+    "+/-", "0", ",", "=",
+
+];
+
+let buttonIndex = 0; 
+
+for (let i = 0; i < 5; i++) {
+    const row = document.createElement("div");
+    row.classList.add("row")
+
+    for (let j = 0; j < 4; j++) {
+        const key = document.createElement("button");
+        key.classList.add("button", `key-${buttonLabels[buttonIndex]}`);
+        key.textContent = buttonLabels[buttonIndex];
+        row.appendChild(key);    
+
+        buttonIndex++;
+    }
+
+    keypad.appendChild(row);
+}
+
 

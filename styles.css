@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+    border: 4px solid black;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    
+}
+
+.container {
+    min-width: 400px;
+    min-height: 500px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.display {
+    flex: 1;
+}
+
+.keypad {
+    flex: 4;
+    display:flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex: 1;
+}
+
+.button {
+    flex: 1;
+    font-size: 26px;
+
+}
+
