@@ -61,12 +61,15 @@ for (let i = 0; i < 5; i++) {
 // Create the functions that populate the display when you click the number buttons. You should be storing the ‘display value’ in a variable somewhere for use in the next step.
 let displayValue = "";
 
+//Operand and operator tracker variables
+
 let firstOperand = null;
 let secondOperand = null;
-let selected Operand = null;
-let operator;
+let selectedOperator= null;
 
-numbers = document.querySelectorAll(".key-0, .key-1, .key-2, .key-3, .key-4, .key-5, .key-6, .key-7, .key-8, .key-9")
+//Adding event listeners to number buttons
+
+numbers = document.querySelectorAll(".key-0, .key-1, .key-2, .key-3, .key-4, .key-5, .key-6, .key-7, .key-8, .key-9");
 
 numbers.forEach(number => {
     number.addEventListener("click", (e) => {
@@ -76,6 +79,32 @@ numbers.forEach(number => {
         });
     });
 
+
+//Adding event listeners to operator buttons
+
+operators = document.querySelectorAll(".key-+, .key-- , .key-*, .key-/");
+
+operators.forEach(operator => {
+    operator.addEventListener("click", (e) => {
+        if (firstOperand === null) {
+            firstOperand = parseFloat(displayValue);
+            selectedOperator = e.target.textContent;
+            displayValue = "";
+        } else if (firstOperand !== null && displayValue !== null) { 
+            secondOperand = parseFloat(displayValue);
+            let result = operate(firstOperand, selectedOperator, secondOperand);
+            displayValue = result.toString();
+            firstOperand = result;
+            selectedOperator = e.target.textContent;
+            secondOperand = null;
+            display.textContent = displayValue;
+        }
+        });
+    });
+
+
+
+//Helper function for appending clicked number to the display value variable
 
 function appendNumber(number) {
     displayValue += number;

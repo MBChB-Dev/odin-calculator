@@ -30,7 +30,6 @@ body {
     padding: 2px 10px;
     display: flex;
     flex-wrap: wrap;
-
 }
 
 .keypad {
@@ -47,6 +46,5 @@ body {
 .button {
     flex: 1;
     font-size: 26px;
-
 }
 
