@@ -20,7 +20,7 @@ let operator;
 
 // Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
 
-function operate(operator, a, b) {
+function operate(a, operator, b) {
    let result = calculations[operator](a,b);
    return result;
 }
@@ -53,9 +53,6 @@ for (let i = 0; i < 5; i++) {
         const key = document.createElement("button");
         key.classList.add("button", `key-${buttonLabels[buttonIndex]}`);
         key.textContent = buttonLabels[buttonIndex];
-        key.addEventListener("click", (e) => {
-            display.textContent = e.target.textContent;
-        })
         row.appendChild(key);    
 
         buttonIndex++;
@@ -63,5 +60,27 @@ for (let i = 0; i < 5; i++) {
 
     keypad.appendChild(row);
 }
+
+// Create the functions that populate the display when you click the number buttons. You should be storing the ‘display value’ in a variable somewhere for use in the next step.
+let displayValue = "";
+
+numbers = document.querySelectorAll(".key-0, .key-1, .key-2, .key-3, .key-4, .key-5, .key-6, .key-7, .key-8, .key-9")
+
+numbers.forEach(number => {
+    number.addEventListener("click", (e) => {
+            const clickedNumber = e.target.textContent;
+            appendNumber(clickedNumber);
+            display.textContent = displayValue;
+        });
+    });
+
+
+function appendNumber(number) {
+    displayValue += number;
+}
+
+// Make the calculator work! You’ll need to store the first number and second number that are input into the calculator, utilize the operator that the user selects, and then operate() on the two numbers when the user presses the “=” key.
+// You should already have the code that can populate the display, so once operate() has been called, update the display with the ‘solution’ to the operation.
+// This is the hardest part of the project. You need to figure out how to store all the values and call the operate function with them. Don’t feel bad if it takes you a while to figure out the logic.
 
 
