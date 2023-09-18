@@ -67,6 +67,12 @@ let firstOperand = null;
 let secondOperand = null;
 let selectedOperator= null;
 
+//Helper function for appending clicked number to the display value variable
+
+function appendNumber(number) {
+    displayValue += number;
+}
+
 //Adding event listeners to number buttons
 
 numbers = document.querySelectorAll(".key-0, .key-1, .key-2, .key-3, .key-4, .key-5, .key-6, .key-7, .key-8, .key-9");
@@ -92,10 +98,10 @@ operators.forEach(operator => {
             displayValue = "";
         } else if (firstOperand !== null && displayValue !== null) { 
             secondOperand = parseFloat(displayValue);
+            selectedOperator = e.target.textContent;
             let result = operate(firstOperand, selectedOperator, secondOperand);
             displayValue = result.toString();
             firstOperand = result;
-            selectedOperator = e.target.textContent;
             secondOperand = null;
             display.textContent = displayValue;
         }
@@ -103,14 +109,21 @@ operators.forEach(operator => {
     });
 
 
-
-//Helper function for appending clicked number to the display value variable
-
-function appendNumber(number) {
-    displayValue += number;
-}
-
 // Make the calculator work! You’ll need to store the first number and second number that are input into the calculator, utilize the operator that the user selects, and then operate() on the two numbers when the user presses the “=” key.
+
+const equalsButton = document.querySelector(".key-=");
+
+equalsButton.addEventListener("click", () => {
+    if (firstOperand !== null && displayValue !== "") {
+        secondOperand = parseFloat(displayValue);
+        let result = operate(firstOperand, selectedOperator, secondOperand);
+        displayValue = result.toString();
+        firstOperand = null;
+        selectedOperator = null;
+        secondOperand = null;
+        display.textContent = displayValue;
+    }
+});
 
 // You should already have the code that can populate the display, so once operate() has been called, update the display with the ‘solution’ to the operation.
 
