@@ -1,10 +1,16 @@
+let displayValue = "";
+let firstOperand = null;
+let secondOperand = null;
+let selectedOperator= null;
+
+
 // Your calculator is going to contain functions for all of the basic math operators you typically find on simple calculators, so start by creating functions for the following items and testing them in your browser’s console.
 // add
 // subtract
 // multiply
 // divide
 
-calculations = {
+let calculations = {
     "+": (a,b) => a + b,
     "-": (a,b) => a - b,
     "*": (a,b) => a * b,
@@ -19,6 +25,7 @@ calculations = {
 
 function operate(a, operator, b) {
    let result = calculations[operator](a,b);
+   displayValue = result.toString();
    return result;
 }
 
@@ -36,7 +43,7 @@ const buttonLabels = [
     "7", "8", "9", "*",
     "4", "5", "6", "-",
     "1", "2", "3", "+",
-    "+/-", "0", ",", "=",
+    "+/-", "0", ".", "=",
 
 ];
 
@@ -59,13 +66,9 @@ for (let i = 0; i < 5; i++) {
 }
 
 // Create the functions that populate the display when you click the number buttons. You should be storing the ‘display value’ in a variable somewhere for use in the next step.
-let displayValue = "";
 
 //Operand and operator tracker variables
 
-let firstOperand = null;
-let secondOperand = null;
-let selectedOperator= null;
 
 //Helper function for appending clicked number to the display value variable
 
@@ -75,7 +78,7 @@ function appendNumber(number) {
 
 //Adding event listeners to number buttons
 
-numbers = document.querySelectorAll(".key-0, .key-1, .key-2, .key-3, .key-4, .key-5, .key-6, .key-7, .key-8, .key-9");
+const numbers = document.querySelectorAll(".key-0, .key-1, .key-2, .key-3, .key-4, .key-5, .key-6, .key-7, .key-8, .key-9");
 
 numbers.forEach(number => {
     number.addEventListener("click", (e) => {
@@ -88,7 +91,7 @@ numbers.forEach(number => {
 
 //Adding event listeners to operator buttons
 
-operators = document.querySelectorAll(".key-+, .key-- , .key-*, .key-/");
+const operators = document.querySelectorAll(".key-\\+, .key\\--, .key-\\*, .key-\\/");
 
 operators.forEach(operator => {
     operator.addEventListener("click", (e) => {
@@ -109,7 +112,7 @@ operators.forEach(operator => {
             firstOperand = parseFloat(displayValue);
             selectedOperator = e.target.textContent;
             displayValue = "";
-        } else if (firstOperand !== null && displayValue !== null) { 
+        } else if (firstOperand !== null && displayValue !== "") { 
             secondOperand = parseFloat(displayValue);
             selectedOperator = e.target.textContent;
             let result = operate(firstOperand, selectedOperator, secondOperand);
@@ -124,7 +127,7 @@ operators.forEach(operator => {
 
 // Make the calculator work! You’ll need to store the first number and second number that are input into the calculator, utilize the operator that the user selects, and then operate() on the two numbers when the user presses the “=” key.
 
-const equalsButton = document.querySelector(".key-=");
+const equalsButton = document.querySelector(".key-\\=");
 
 equalsButton.addEventListener("click", () => {
     if (firstOperand !== null && displayValue !== "") {
@@ -134,6 +137,7 @@ equalsButton.addEventListener("click", () => {
         firstOperand = null;
         selectedOperator = null;
         secondOperand = null;
+
         display.textContent = displayValue;
     }
 });
@@ -149,4 +153,12 @@ clearButton.addEventListener("click", () => {
     display.textContent = displayValue;
 });
 
+//Add function for decimal button
 
+const decimalButton = document.querySelector(".key-\\.");
+decimalButton.addEventListener("click", () => {
+    if (!displayValue.includes('.')) {
+        appendNumber('.');
+        display.textContent = displayValue;
+    }
+});
