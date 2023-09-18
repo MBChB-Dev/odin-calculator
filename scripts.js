@@ -1,42 +1,4 @@
-let displayValue = "";
-let firstOperand = null;
-let secondOperand = null;
-let selectedOperator= null;
-
-
-// Your calculator is going to contain functions for all of the basic math operators you typically find on simple calculators, so start by creating functions for the following items and testing them in your browser’s console.
-// add
-// subtract
-// multiply
-// divide
-
-let calculations = {
-    "+": (a,b) => a + b,
-    "-": (a,b) => a - b,
-    "*": (a,b) => a * b,
-    "/": (a,b) => a / b,
-};
-
-// A calculator operation will consist of a number, an operator, and another number. For example, 3 + 5. Create three variables for each of the parts of a calculator operation. Create a variable for the first number, the operator, and the second number. You’ll use these variables to update your display later.
-
-
-
-// Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
-
-function operate(a, operator, b) {
-    if (operator === '/' && b === 0) {
-        return "Can't divide by zero, can you?";
-    }
-   let result = calculations[operator](a,b);
-   displayValue = result.toString();
-   return Math.round(result* 100) / 100;
-}
-
-
-// Create a basic HTML calculator with buttons for each digit, each of the above functions and an “Equals” key.
-// Do not worry about wiring up the JS just yet.
-// There should also be a display for the calculator. Go ahead and fill it with some dummy numbers so it looks correct.
-// Add a “clear” button.
+// JS code to add keypad buttons to the html calculator shell
 
 const keypad = document.querySelector(".keypad");
 const display = document.querySelector(".display");
@@ -47,7 +9,6 @@ const buttonLabels = [
     "4", "5", "6", "-",
     "1", "2", "3", "+",
     "+/-", "0", ".", "=",
-
 ];
 
 let buttonIndex = 0; 
@@ -68,18 +29,50 @@ for (let i = 0; i < 5; i++) {
     keypad.appendChild(row);
 }
 
-// Create the functions that populate the display when you click the number buttons. You should be storing the ‘display value’ in a variable somewhere for use in the next step.
 
-//Operand and operator tracker variables
+// Variables to track the display, operator and operands
+
+let displayValue = "";
+let firstOperand = null;
+let secondOperand = null;
+let selectedOperator= null;
 
 
-//Helper function for appending clicked number to the display value variable
+// Operations stored as an object for the operate function
+// to access 
+
+let calculations = {
+    "+": (a,b) => a + b,
+    "-": (a,b) => a - b,
+    "*": (a,b) => a * b,
+    "/": (a,b) => a / b,
+};
+
+
+// Operate function that does the calculation using the operator 
+// and operands. It calls one of the functions stored in the 
+// calculations object depending on the operator chosen by the user. Result is 
+// rounded to two decimal places
+
+function operate(a, operator, b) {
+    if (operator === '/' && b === 0) {
+        return "Can't divide by zero, can you?";
+    }
+   let result = calculations[operator](a,b);
+   displayValue = result.toString();
+   return Math.round(result* 100) / 100;
+}
+
+
+// Helper function for appending selected number to the 
+// display value variable
 
 function appendNumber(number) {
     displayValue += number;
 }
 
-//Adding event listeners to number buttons
+
+// Event listeners for number buttons
 
 const numbers = document.querySelectorAll(".key-0, .key-1, .key-2, .key-3, .key-4, .key-5, .key-6, .key-7, .key-8, .key-9");
 
@@ -92,14 +85,14 @@ numbers.forEach(number => {
     });
 
 
-//Adding event listeners to operator buttons
+// Event listeners to operator buttons
 
 const operators = document.querySelectorAll(".key-\\+, .key\\--, .key-\\*, .key-\\/");
 
 operators.forEach(operator => {
     operator.addEventListener("click", (e) => {
         
-        //if statement to check for division by zero******
+        // first if statement checks for division by zero
         
         if (selectedOperator === '/' && secondOperand === 0) {
             displayValue = "Error: Division by zero";
@@ -109,7 +102,15 @@ operators.forEach(operator => {
             display.textContent = displayValue;
         }
 
-        //************* */
+        // second if statement onwards checks if first operand
+        // is missing, it sets it to the current display value
+        // and sets the selected operator to the clicked operator
+        // otherwise if the first operator is present it sets the 
+        // second operand to the display value, sets the operator
+        // and calls the operate function to do the calculation.
+        // then it displays the result, set the first operand of the next
+        // calculation to the result, and resets the second operand 
+        // to null
         
         if (firstOperand === null) {
             firstOperand = parseFloat(displayValue);
@@ -128,7 +129,10 @@ operators.forEach(operator => {
     });
 
 
-// Make the calculator work! You’ll need to store the first number and second number that are input into the calculator, utilize the operator that the user selects, and then operate() on the two numbers when the user presses the “=” key.
+// Event listener for equals button. On selection, if there's 
+// a first and second operand it calls the operate function to do
+// the calculation, shows the result, and resets all the variable 
+// for next calculation to start afresh 
 
 const equalsButton = document.querySelector(".key-\\=");
 
@@ -145,7 +149,8 @@ equalsButton.addEventListener("click", () => {
     }
 });
 
-//Add function to reset all variable when clear button clicked
+
+// Event listener for clear button to reset all variables 
 
 const clearButton = document.querySelector(".key-C");
 clearButton.addEventListener("click", () => {
@@ -156,7 +161,9 @@ clearButton.addEventListener("click", () => {
     display.textContent = displayValue;
 });
 
-//Add function for decimal button
+
+// Event listener for decimal point button to only be able to 
+// one decimal to the screen 
 
 const decimalButton = document.querySelector(".key-\\.");
 decimalButton.addEventListener("click", () => {
