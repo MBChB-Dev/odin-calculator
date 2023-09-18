@@ -125,8 +125,15 @@ equalsButton.addEventListener("click", () => {
     }
 });
 
-// You should already have the code that can populate the display, so once operate() has been called, update the display with the ‘solution’ to the operation.
+//Add function to reset all variable when clear button clicked
 
-// This is the hardest part of the project. You need to figure out how to store all the values and call the operate function with them. Don’t feel bad if it takes you a while to figure out the logic.
+const clearButton = document.querySelector(".key-C");
+clearButton.addEventListener("click", () => {
+    displayValue = "";
+    firstOperand = null;
+    selectedOperator = null;
+    secondOperand = null;
+    display.textContent = displayValue;
+});
 
 
