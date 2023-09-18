@@ -13,9 +13,6 @@ calculations = {
 
 // A calculator operation will consist of a number, an operator, and another number. For example, 3 + 5. Create three variables for each of the parts of a calculator operation. Create a variable for the first number, the operator, and the second number. You’ll use these variables to update your display later.
 
-let operandA;
-let operandB;
-let operator;
 
 
 // Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
@@ -64,6 +61,11 @@ for (let i = 0; i < 5; i++) {
 // Create the functions that populate the display when you click the number buttons. You should be storing the ‘display value’ in a variable somewhere for use in the next step.
 let displayValue = "";
 
+let firstOperand = null;
+let secondOperand = null;
+let selected Operand = null;
+let operator;
+
 numbers = document.querySelectorAll(".key-0, .key-1, .key-2, .key-3, .key-4, .key-5, .key-6, .key-7, .key-8, .key-9")
 
 numbers.forEach(number => {
@@ -80,7 +82,9 @@ function appendNumber(number) {
 }
 
 // Make the calculator work! You’ll need to store the first number and second number that are input into the calculator, utilize the operator that the user selects, and then operate() on the two numbers when the user presses the “=” key.
+
 // You should already have the code that can populate the display, so once operate() has been called, update the display with the ‘solution’ to the operation.
+
 // This is the hardest part of the project. You need to figure out how to store all the values and call the operate function with them. Don’t feel bad if it takes you a while to figure out the logic.
 
 
