@@ -92,6 +92,19 @@ operators = document.querySelectorAll(".key-+, .key-- , .key-*, .key-/");
 
 operators.forEach(operator => {
     operator.addEventListener("click", (e) => {
+        
+        //if statement to check for division by zero******
+        
+        if (selectedOperator === '/' && secondOperand === 0) {
+            displayValue = "Error: Division by zero";
+            firstOperand = null;
+            selectedOperator = null;
+            secondOperand = null;
+            display.textContent = displayValue;
+        }
+
+        //************* */
+        
         if (firstOperand === null) {
             firstOperand = parseFloat(displayValue);
             selectedOperator = e.target.textContent;
